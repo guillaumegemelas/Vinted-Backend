@@ -44,6 +44,7 @@ app.use(offRoutes);
 app.get("/", (req, res) => {
   res.json("Bienvenue sur mon serveur");
 });
+// url du serveur: https://site--backend-vinted--zqfvjrr4byql.code.run/
 //
 app.all("*", (req, res) => {
   res.status(400).json({ message: "This route doesn't exist" });
@@ -52,3 +53,5 @@ app.all("*", (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log("server started 🟩");
 });
+
+
