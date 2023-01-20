@@ -40,6 +40,10 @@ app.use(logRoutes);
 const offRoutes = require("./routes/offer");
 app.use(offRoutes);
 
+// Ceci est une route pour dire boujour
+app.get("/", (req, res) => {
+  res.json("Bienvenue sur mon serveur");
+});
 //
 app.all("*", (req, res) => {
   res.status(400).json({ message: "This route doesn't exist" });
