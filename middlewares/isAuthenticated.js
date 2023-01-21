@@ -31,7 +31,7 @@ const isAuthenticated = async (req, res, next) => {
     }
 
     // il faut stocker le profil qui match pour le garder sous la main et l'utiliser dans ma route
-    req.user = profil; //le req est le meme que dans la route avec oofer donc on créé une clef à req (user) que l'on pourra utiliser dans la route offer
+    req.user = profil; //le req est le meme que dans la route avec offer donc on créé une clef à req (user) que l'on pourra utiliser dans la route offer
     //
     next();
     //
