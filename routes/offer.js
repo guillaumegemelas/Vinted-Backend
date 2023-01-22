@@ -168,7 +168,8 @@ router.put(
   async (req, res) => {
     try {
       const offerToModify = await Offer.findById(req.params.id);
-      //renvoie à la requete reçue dans postman
+      //console.log(req.params.id);
+      //renvoie à la requete Id reçue dans postman
       if (req.body.title) {
         offerToModify.product_name = req.body.title;
       }
@@ -180,11 +181,15 @@ router.put(
       }
 
       const details = offerToModify.product_details;
+      //console.log(offerToModify.product_details);
+
       for (let i = 0; i < details.length; i++) {
         if (details[i].ETAT) {
           if (req.body.condition) {
+            //console.log(details[i].ETAT); renvoie à l'ETAT qu'il y a dans l'annonce
             details[i].ETAT = req.body.condition;
           }
+          //console.log(req.body.condition); renvoie à ce qu'on rentre dans Postman pour mettre à jour l'ETAT dans l'annonce initiale
         }
         if (details[i].EMPLACEMENT) {
           if (req.body.city) {
