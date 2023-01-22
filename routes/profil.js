@@ -29,11 +29,11 @@ router.post("/user/signup", async (req, res) => {
     // console.log("password1 :", password);
     //on peut se passer des 2 lignes de dessus et mettre directement password au lieu de créer une var password1 et faire (salt + password1)
     const salt = uid2(16);
-    console.log("salt :", salt);
+    //console.log("salt :", salt);
     const hash = SHA256(salt + password).toString(encBase64);
-    console.log("hash :", hash);
+    //console.log("hash :", hash);
     const token = uid2(64);
-    console.log("token :", token);
+    //console.log("token :", token);
 
     //création du nouveau Profil dans la base de données avec les données cryptées
     const newProfil = new Profil({

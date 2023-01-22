@@ -160,11 +160,71 @@ router.get("/offer/:id", async (req, res) => {
   }
 });
 
-router.put("/offer/delete/:id", async (req, res) => {
-  try {
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+//route pour modifier une annonce: à compléter avec corrections et à tester en local
+router.put(
+  "/offer/udate/:id",
+  isAuthenticated,
+  fileUpload(),
+  async (req, res) => {
+    try {
+      const offerToModify = await Offer.findById(req.params.id);
+      //renvoie à la requete reçue dans postman
+      if (req.body.title) {
+        offerToModify.product_name = req.body.title;
+      }
+      if (req.body.description) {
+        offerToModify.product_description = req.body.description;
+      }
+      if (req.body.price) {
+        offerToModify.product_price = req.body.price;
+      }
+
+      const details = offerToModify.product_details;
+      for (let i = 0; i < details.length; i++) {
+        if (details[i].ETAT) {
+          if (req.body.condition) {
+            details[i].ETAT = req.body.condition;
+          }
+        }
+        if (details[i].EMPLACEMENT) {
+          if (req.body.city) {
+            details[i].EMPLACEMENT = req.body.city;
+          }
+        }
+        if (details[i].MARQUE) {
+          if (req.body.brand) {
+            details[i].MARQUE = req.body.brand;
+          }
+        }
+        if (details[i].TAILLE) {
+          if (req.body.size) {
+            details[i].TAILLE = req.body.size;
+          }
+        }
+        if (details[i].COULEUR) {
+          if (req.body.color) {
+            details[i].COULEUR = req.body.color;
+          }
+        }
+      }
+      offerToModify.markModified("product_details");
+
+      if (req.files?.picture) {
+        const result = await cloudinary.uploader.upload(
+          convertToBase64(req.files.picture),
+          { folder: "/Vinted/offers/," }
+        );
+        offerToModify.product_image = result;
+      }
+
+      await offerToModify.save();
+
+      console.log("route fonctionne");
+      res.status(200).json("Offer modified succesfully !");
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
   }
-});
+);
 
 module.exports = router;
