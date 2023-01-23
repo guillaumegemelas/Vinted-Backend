@@ -17,7 +17,8 @@ router.post("/user/signup", async (req, res) => {
     if (!username || !email || !password || typeof newsletter !== "boolean") {
       return res.status(400).json({ message: "Missing parameter ⚠️" });
     }
-    const profilToFind = await Profil.findOne({ email: email }); //on peut aussi passer par .exist qui renvoie directement à l'Id au lieu de l'email dans le profil complet
+    const profilToFind = await Profil.findOne({ email: email }); //on peut aussi passer par .exist qui renvoie directement à l'Id au lieu de 
+    //l'email dans le profil complet
     //console.log(profilToFind); //pour savoir si le mail existe deja dans la BD: va chercher avec l'Id la correspondance email
     //et donc si profilToFind qui contient l'email en question existe ou pas
 
