@@ -160,7 +160,7 @@ router.get("/offer/:id", async (req, res) => {
   }
 });
 
-//route pour modifier une annonce: à compléter avec corrections et à tester en local
+//route pour modifier une annonce: à compléter avec corrections et à tester en local//
 router.put(
   "/offer/udate/:id",
   isAuthenticated,
